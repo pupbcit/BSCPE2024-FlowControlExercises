@@ -10,10 +10,9 @@ namespace EvaluateGrades
             Console.Write("Enter how many grades you want to input: ");
             int numberOfGrades = Convert.ToInt16(Console.ReadLine()); //5
 
-            int counter = 0;
             double sum = 0;
 
-            while (counter < numberOfGrades)
+            for (int counter = 0; counter < numberOfGrades; counter++)
             {
                 Console.Write("Input grade: ");
                 double grade = Convert.ToInt16(Console.ReadLine());
@@ -27,7 +26,6 @@ namespace EvaluateGrades
                     Console.WriteLine("Invalid Input.");
                 }
 
-                counter++;
             }
 
             double average = sum / numberOfGrades;
