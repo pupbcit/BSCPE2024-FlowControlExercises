@@ -1,49 +1,58 @@
-﻿namespace EvaluateGrades
+﻿using System;
+
+namespace EvaluateGrades
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            double firstGrade, secondGrade;
+            // Get number of grades that the user wants to input
+            Console.Write("Enter how many grades you want to input: ");
+            int numberOfGrades = Convert.ToInt16(Console.ReadLine()); //5
 
-            Console.Write("Input First Grade: ");
-            firstGrade = Convert.ToDouble(Console.ReadLine());
+            int counter = 0;
+            double sum = 0;
 
-            Console.Write("Input Second Grade: ");
-            secondGrade = Convert.ToDouble(Console.ReadLine());
-
-            //ADD LOOP AND INTRODUCE METHODS
-
-            if ((firstGrade > 0 && firstGrade < 100) && (secondGrade > 0 && secondGrade < 100))
+            while (counter < numberOfGrades)
             {
-                double average = (firstGrade + secondGrade) / 2;
+                Console.Write("Input grade: ");
+                double grade = Convert.ToInt16(Console.ReadLine());
 
-                Console.WriteLine("Your average is " + average);
+                if (grade > 0 && grade < 100)
+                {
+                    sum = sum + grade;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input.");
+                }
 
-                if (average <= 50)
-                {
-                    Console.WriteLine("FAILED");
-                }
-                else if (average > 50 && average <= 70)
-                {
-                    Console.WriteLine("FAIR");
-                }
-                else if (average > 70 && average <= 80)
-                {
-                    Console.WriteLine("GOOD");
-                }
-                else if (average > 80 && average <= 90)
-                {
-                    Console.WriteLine("VERY GOOD");
-                }
-                else if (average > 90 && average <= 100)
-                {
-                    Console.WriteLine("EXCELLENT");
-                }
+                counter++;
             }
-            else
+
+            double average = sum / numberOfGrades;
+
+            Console.WriteLine("Your average is " + average);
+
+            if (average <= 50)
             {
-                Console.WriteLine("Invalid input.");
+                Console.WriteLine("FAILED");
+            }
+            else if (average > 50 && average <= 70)
+            {
+                Console.WriteLine("FAIR");
+            }
+            else if (average > 70 && average <= 80)
+            {
+                Console.WriteLine("GOOD");
+            }
+            else if (average > 80 && average <= 90)
+            {
+                Console.WriteLine("VERY GOOD");
+            }
+            else if (average > 90 && average <= 100)
+            {
+                Console.WriteLine("EXCELLENT");
             }
         }
     }
