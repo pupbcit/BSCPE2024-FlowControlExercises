@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.SymbolStore;
 
 namespace EvaluateGrades
 {
@@ -8,10 +9,11 @@ namespace EvaluateGrades
         {
             // Get number of grades that the user wants to input
             Console.Write("Enter how many grades you want to input: ");
-            int numberOfGrades = Convert.ToInt16(Console.ReadLine()); //5
+            int numberOfGrades = Convert.ToInt16(Console.ReadLine());//5
 
-            double sum = 0;
+            double[] grades = new double[numberOfGrades];
 
+            //gets user input in put those in the array
             for (int counter = 0; counter < numberOfGrades; counter++)
             {
                 Console.Write("Input grade: ");
@@ -19,18 +21,29 @@ namespace EvaluateGrades
 
                 if (grade > 0 && grade < 100)
                 {
-                    sum = sum + grade;
+                    grades[counter] = grade;
                 }
                 else
                 {
                     Console.WriteLine("Invalid Input.");
                 }
+            }
 
+            Console.WriteLine("END OF USER INPUT");
+
+            Console.WriteLine("PROCESSING GRADES....");
+
+            double sum = 0;
+
+            //access the data in the array and get their sum
+            for (int counter = 0; counter < numberOfGrades; counter++)
+            {
+                sum = sum + grades[counter];
             }
 
             double average = sum / numberOfGrades;
 
-            Console.WriteLine("Your average is " + average);
+            Console.WriteLine("The average grade is " + average);
 
             if (average <= 50)
             {
@@ -51,6 +64,14 @@ namespace EvaluateGrades
             else if (average > 90 && average <= 100)
             {
                 Console.WriteLine("EXCELLENT");
+            }
+
+            //display all grades
+            Console.WriteLine("here are the grades given by your professor:");
+
+            for (int counter = 0; counter < numberOfGrades; counter++)
+            {
+                Console.Write(grades[counter] + "-");
             }
         }
     }
