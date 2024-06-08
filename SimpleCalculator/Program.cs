@@ -1,49 +1,61 @@
-﻿namespace SimpleCalculator
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Xml.XPath;
+
+namespace SimpleCalculator
 {
     internal class Program
     {
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Select 1 to ADD, 2 to SUBTRACT, 3 to MULPTIPLY, 4 to DIVIDE");
+            //Get User Input -- operation
+            Console.WriteLine("Select 1 to ADD, 2 to SUBTRACT, 3 to MULTIPLY, 4 to DIVIDE");
             Console.Write("User input: ");
+
             int operation = Convert.ToInt16(Console.ReadLine());
 
+            //Get user input -- 2 numbers
             Console.Write("Enter first number: ");
             int firstNumber = Convert.ToInt16(Console.ReadLine());
 
             Console.Write("Enter second number: ");
             int secondNumber = Convert.ToInt16(Console.ReadLine());
 
+            string result = Calculate(operation, firstNumber, secondNumber);
+
+            Console.WriteLine(result);
+        }
+
+        public static string Calculate(int operation, int firstNumber, int secondNumber)
+        {
+            string message = "";
+
             switch (operation)
             {
                 case 1:
-                    int sum = firstNumber + secondNumber;
+                    message = $"The result is {Add(firstNumber, secondNumber)}.";
 
-                    Console.WriteLine($"ADD {firstNumber} and {secondNumber} the result is {sum}.");
                     break;
                 case 2:
 
-                    if (firstNumber > secondNumber)
-                    {
-                        int difference = firstNumber - secondNumber;
+                    int result = Subtract(firstNumber, secondNumber);
 
-                        Console.WriteLine($"SUBTRACT {secondNumber} from {firstNumber} the result is {difference}");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. First Number should be greater than Second Number");
-                    }
+                    message = result >= 0 ?
+                                    $"SUBTRACT {secondNumber} from {firstNumber} the result is {result}"
+                                    : "Invalid input";
+
                     break;
                 case 3:
-                    int product = firstNumber * secondNumber;
-
-                    Console.WriteLine($"MULTIPLY {firstNumber} and {secondNumber} the result is {product}");
+                    message = $"MULTIPLY {firstNumber} and {secondNumber} the result is {Multiply(firstNumber, secondNumber)}";
                     break;
                 case 4:
 
+                    //validation
                     if (secondNumber == 0)
                     {
-                        Console.WriteLine("Second number cannot be 0");
+                        message = "Second number cannot be 0";
                         break;
                     }
 
@@ -51,18 +63,48 @@
                     {
                         int quotient = firstNumber / secondNumber;
 
-                        Console.WriteLine($"DIVIDE {firstNumber} to {secondNumber} the result is {quotient}");
+                        message = $"DIVIDE {firstNumber} to {secondNumber} the result is {quotient}";
+
                     }
                     else
                     {
-                        Console.WriteLine("Invalid input. First Number should be greater than Second Number");
+                        message = "Invalid input. First Number should be greater than Second Number";
                     }
 
                     break;
                 default:
-                    Console.WriteLine("Invalid input.");
+                    message = "Invalid input.";
                     break;
             }
+
+            return message;
         }
+
+        public static int Add(int num1, int num2) //method signature
+        {
+            int sum = num1 + num2;
+
+            return sum;
+        }
+
+        public static int Subtract(int num1, int num2)
+        {
+            int difference = -1;
+            
+            if (num1 > num2)
+            {
+              difference = num1 - num2;
+            }
+
+            return difference;
+        }
+
+        public static int Multiply(int num1, int num2) //method signature
+        {
+            int product = num1 * num2;
+
+            return product;
+        }
+
     }
 }
